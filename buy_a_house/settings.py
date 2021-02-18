@@ -93,3 +93,5 @@ sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__f
 os.environ['DJANGO_SETTINGS_MODULE'] = 'house_site.settings'
 import django
 django.setup()
+
+ITEM_PIPELINES = {"buy_a_house.pipelines.BuyAHousePipeline": 300}

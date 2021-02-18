@@ -13,4 +13,7 @@ class firstSpider(scrapy.Spider):
       xlink = LinkExtractor()
       for link in xlink.extract_links(response):
           if len(str(link)) > 200:
-              print(len(str(link)), ":", link.text, "-",link, "\n")
+              item = BuyAHouseItem()
+              item['text'] = link.text
+              item['link'] = link
+              yield item
