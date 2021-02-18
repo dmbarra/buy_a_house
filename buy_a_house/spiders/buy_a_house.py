@@ -3,7 +3,7 @@ from scrapy.linkextractors import LinkExtractor
 
 from buy_a_house.items import BuyAHouseItem
 
-class firstSpider(scrapy.Spider):
+class googleSpider(scrapy.Spider):
   name = "basic"
   start_urls = [
     "https://www.google.com/search?q=imobiliaria+barbacena"
