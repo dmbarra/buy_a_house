@@ -16,4 +16,5 @@ class firstSpider(scrapy.Spider):
               item = BuyAHouseItem()
               item['text'] = link.text
               item['link'] = link
+              item['url'] = link.url
               yield item
