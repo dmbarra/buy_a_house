@@ -1,6 +1,8 @@
 import scrapy 
 from scrapy.linkextractors import LinkExtractor
 
+from buy_a_house.items import BuyAHouseItem
+
 class firstSpider(scrapy.Spider):
   name = "basic"
   start_urls = [
@@ -10,5 +12,5 @@ class firstSpider(scrapy.Spider):
   def parse(self, response):
       xlink = LinkExtractor()
       for link in xlink.extract_links(response):
-          if len(str(link)) > 200 or 'imoveis' in link.text:
-              print(len(str(link)), link.text, link, "\n")
+          if len(str(link)) > 200:
+              print(len(str(link)), ":", link.text, "-",link, "\n")
