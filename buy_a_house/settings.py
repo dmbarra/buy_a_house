@@ -94,4 +94,5 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'house_site.settings'
 import django
 django.setup()
 
-ITEM_PIPELINES = {"buy_a_house.pipelines.BuyAHousePipeline": 300}
+ITEM_PIPELINES = {"buy_a_house.pipelines.BuyAHousePipeline": 300,
+                  "buy_a_house.pipelines.RentAPropertyPipeline": 300}

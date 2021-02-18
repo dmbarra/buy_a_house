@@ -1,8 +1,9 @@
 import re
-
 import scrapy
 from scrapy.linkextractors import LinkExtractor
+from buy_a_house.items import RentAProperty
 from polls.models.basic_crawler import BasicCrawler
+from polls.models.rental_property import RentalProperty
 
 allow_extract = [r'.com/', r'.com.br/']
 deny_domains_extract = ['google.com', 'web.whatsapp.com', 'bb.com.br']
@@ -16,7 +17,7 @@ def load_url():
     return urls
 
 
-class rentPropertySpider(scrapy.Spider):
+class RentAPropertySpider(scrapy.Spider):
   name = "rent_layer"
   start_urls = load_url()
 
@@ -26,4 +27,9 @@ class rentPropertySpider(scrapy.Spider):
           if len(str(link)) > 200:
             matchResult = get_just_address.search(link.url)
             if matchResult:
-                print("REFINED: "+matchResult.group(0))
+                rent = RentalProperty.objects.filter(url=matchResult.group(0)).exists()
+                if not rent:
+                    item = RentAProperty()
+                    item['url'] = matchResult.group(0)
+                    item['total_of_places'] = 0
+                    yield item
