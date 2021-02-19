@@ -2,12 +2,12 @@ import re
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from buy_a_house.items import RentAProperty
+from buy_a_house.variables.denny_urls import deny_domains_extract
 from polls.models.basic_crawler import BasicCrawler
 from polls.models.rental_property import RentalProperty
 
-allow_extract = [r'.com/', r'.com.br/']
-deny_domains_extract = ['google.com', 'web.whatsapp.com', 'bb.com.br']
-get_just_address = re.compile('(.*\.)?(htt.*)\.com.br|(.*\.)?(htt.*)\.com')
+allow_extract = [r'.com/', r'.com.br/', '.br/']
+get_just_address = re.compile("(http:\/\/[^\/]*\/)|(https:\/\/[^\/]*\/)")
 
 
 def load_url():
@@ -22,14 +22,18 @@ class RentAPropertySpider(scrapy.Spider):
   start_urls = load_url()
 
   def parse(self, response):
-      xlink = LinkExtractor(allow=allow_extract, deny_domains=deny_domains_extract)
+      xlink = LinkExtractor(allow=allow_extract)
       for link in xlink.extract_links(response):
           if len(str(link)) > 200:
-            matchResult = get_just_address.search(link.url)
-            if matchResult:
-                rent = RentalProperty.objects.filter(url=matchResult.group(0)).exists()
-                if not rent:
-                    item = RentAProperty()
-                    item['url'] = matchResult.group(0)
-                    item['total_of_places'] = 0
-                    yield item
+            extracted = get_just_address.findall(link.url)
+            for url in extracted:
+                # print("URL -> " + ''.join(url))
+                yield from self.save_the_item(''.join(url))
+
+  def save_the_item(self, url):
+      rent = RentalProperty.objects.filter(url=url).exists()
+      if not rent and url not in deny_domains_extract:
+          item = RentAProperty()
+          item['url'] = url
+          item['total_of_places'] = 0
+          yield item
