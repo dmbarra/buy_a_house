@@ -7,7 +7,15 @@ class BuyAHousePipeline:
         item.save()
         return item
 
+
 class RentAPropertyPipeline:
     def process_item(self, item, spider):
         item.save()
         return item
+
+
+class FindThePropertyPipeline:
+    def process_item(self, item, spider):
+        item.save()
+        return item
+

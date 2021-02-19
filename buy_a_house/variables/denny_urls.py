@@ -16,4 +16,9 @@ deny_domains_extract = [
     'http://www.poupex.com.br/',
     'https://www.bb.com.br/',
     'https://web.whatsapp.com/',
+    'http://www8.caixa.gov.br/',
+    'https://b-m.facebook.com/',
+    'https://www.waze.com/',
+    'https://www.youtube.com/',
+
 ]

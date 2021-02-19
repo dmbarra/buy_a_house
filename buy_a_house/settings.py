@@ -95,4 +95,5 @@ import django
 django.setup()
 
 ITEM_PIPELINES = {"buy_a_house.pipelines.BuyAHousePipeline": 300,
-                  "buy_a_house.pipelines.RentAPropertyPipeline": 300}
+                  "buy_a_house.pipelines.RentAPropertyPipeline": 300,
+                  "buy_a_house.pipelines.FindThePropertyPipeline": 300}
