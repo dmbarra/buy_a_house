@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -49,9 +50,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-ROOT_URLCONF = 'house_site.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,6 +65,9 @@ TEMPLATES = [
         },
     },
 ]
+
+ROOT_URLCONF = 'house_site.urls'
+
 
 WSGI_APPLICATION = 'house_site.wsgi.application'
 

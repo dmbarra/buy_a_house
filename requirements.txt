@@ -1,1 +1,2 @@
 scrapy
+django-tables2

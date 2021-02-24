@@ -1,7 +1,7 @@
 from django.urls import path
 
-from . import views
+from .views import RentalPropertyListView
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', RentalPropertyListView.as_view()),
 ]

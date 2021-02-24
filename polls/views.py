@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import ListView
+from polls.models.rental_property import RentalProperty
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+class RentalPropertyListView(ListView):
+    model = RentalProperty
+    template_name = 'rental_property.html'

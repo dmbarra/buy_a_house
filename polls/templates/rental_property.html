@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{# polls/templates/rental_property.html #}
+{% load render_table from django_tables2 %}
+<html>
+    <head>
+        <title>List of Rental</title>
+    </head>
+    <body>
+        {% render_table object_list %}
+    </body>
+</html>
