@@ -2,7 +2,6 @@ import re
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from buy_a_house.items import RentAProperty
-from buy_a_house.variables.denny_urls import deny_domains_extract
 from polls.models.basic_crawler import BasicCrawler
 from polls.models.black_list import BlackList
 from polls.models.rental_property import RentalProperty
