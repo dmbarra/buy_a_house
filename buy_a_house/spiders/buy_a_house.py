@@ -6,8 +6,10 @@ from buy_a_house.items import BuyAHouseItem
 class googleSpider(scrapy.Spider):
   name = "basic"
   start_urls = [
-    "https://www.google.com/search?q=imobiliaria+barbacena"
-   ]
+    "https://www.google.com/search?q=imobiliaria+barbacena/mg"
+    "https://www.google.com/search?q=imoveis+barbacena/mg"
+    "https://www.google.com/search?q=lotes+barbacena/mg"
+  ]
 
   def parse(self, response):
       xlink = LinkExtractor()
