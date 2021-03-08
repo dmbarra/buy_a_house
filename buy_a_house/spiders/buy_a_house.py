@@ -9,6 +9,7 @@ class googleSpider(scrapy.Spider):
     "https://www.google.com/search?q=imobiliaria+barbacena/mg"
     "https://www.google.com/search?q=imoveis+barbacena/mg"
     "https://www.google.com/search?q=lotes+barbacena/mg"
+    "https://www.google.com/search?q=terrenos+barbacena/mg"
   ]
 
   def parse(self, response):

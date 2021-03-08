@@ -1,6 +1,7 @@
 import time
 
 import scrapy
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome import webdriver
 
 from polls.models.rental_property import RentalProperty
@@ -25,8 +26,11 @@ class FindThePropertySpider(scrapy.Spider):
   def parse(self, response):
       for url in self.start_urls:
           self.driver.get(url)
-          if(self.driver.find_element_by_id("recaptcha")):
-              self.driver.find_element_by_css_selector(".recaptcha-checkbox-border").click()
+          try:
+            if(self.driver.find_element_by_id("recaptcha")):
+                print("SAD!!")
+          except NoSuchElementException:
+            pass
           print(self.driver.title)
           time.sleep(40)
 
