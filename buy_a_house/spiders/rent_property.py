@@ -4,6 +4,7 @@ from scrapy.linkextractors import LinkExtractor
 from buy_a_house.items import RentAProperty
 from buy_a_house.variables.denny_urls import deny_domains_extract
 from polls.models.basic_crawler import BasicCrawler
+from polls.models.black_list import BlackList
 from polls.models.rental_property import RentalProperty
 
 allow_extract = [r'.com/', r'.com.br/', '.br/']
@@ -32,7 +33,8 @@ class RentAPropertySpider(scrapy.Spider):
 
   def save_the_item(self, url):
       rent = RentalProperty.objects.filter(url=url).exists()
-      if not rent and url not in deny_domains_extract:
+      blocked = BlackList.objects.filter(url=url).exists()
+      if not rent and not blocked:
           item = RentAProperty()
           item['url'] = url
           item['total_of_places'] = 0
