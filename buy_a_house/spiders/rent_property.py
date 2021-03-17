@@ -5,6 +5,7 @@ from buy_a_house.items import RentAProperty
 from polls.models.basic_crawler import BasicCrawler
 from polls.models.black_list import BlackList
 from polls.models.rental_property import RentalProperty
+from polls.models.scrapy_improviments import ScrapyImprovement
 
 allow_extract = [r'.com/', r'.com.br/', '.br/']
 get_just_address = re.compile("(http:\/\/[^\/]*\/)|(https:\/\/[^\/]*\/)")
@@ -38,7 +39,8 @@ class RentAPropertySpider(scrapy.Spider):
   def save_the_item(self, url):
       rent = RentalProperty.objects.filter(url=url).exists()
       blocked = BlackList.objects.filter(url=url).exists()
-      if not rent and not blocked:
+      promoted = ScrapyImprovement.objects.filter(url=url).exists()
+      if not rent and not blocked and not promoted:
           item = RentAProperty()
           item['url'] = url
           item['total_of_places'] = 0
