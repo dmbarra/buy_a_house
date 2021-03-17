@@ -19,7 +19,12 @@ def load_url():
 
 class RentAPropertySpider(scrapy.Spider):
   name = "rent_layer"
-  start_urls = load_url()
+
+  def start_requests(self):
+      urls = load_url()
+      for url in urls:
+          yield scrapy.Request(url=url, callback=self.parse)
+
 
   def parse(self, response):
       xlink = LinkExtractor(allow=allow_extract)

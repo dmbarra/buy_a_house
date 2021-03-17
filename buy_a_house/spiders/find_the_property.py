@@ -16,12 +16,16 @@ def load_url():
 
 class FindThePropertySpider(scrapy.Spider):
   name = "property_layer"
-  start_urls = load_url()
   handle_httpstatus_list = [302,303,429]
 
   def __init__(self):
       self.driver = webdriver.WebDriver()
       self.driver.maximize_window()
+
+  def start_requests(self):
+      urls = load_url()
+      for url in urls:
+          yield scrapy.Request(url=url, callback=self.parse)
 
   def parse(self, response):
       for url in self.start_urls:
